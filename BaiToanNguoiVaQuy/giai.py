@@ -5,8 +5,6 @@ def Check(O):
     return False
   return True
 
-step = []
-
 def Children(O):
   res = []
   # 1. 2 người qua sông
@@ -32,7 +30,6 @@ def Children(O):
       child = [O[0], O[1]+2, 0, O[3], O[4]-2]
       if Check(child):
         res.append(child)
-
   # 3. 1 người qua sông
   if O[2] == 0:
     if O[0]>=1:
@@ -44,21 +41,17 @@ def Children(O):
       child = [O[0]+1, O[1], 0, O[3]-1, O[4]]
       if Check(child):
         res.append(child)
-
-  # 4. 1 quỷ qua sôn
+  # 4. 1 quỷ qua sông
   if O[2] == 0:
     if O[1]>=1:
       child = [O[0], O[1]-1, 1, O[3], O[4]+1]
       if Check(child):
         res.append(child)
-
   else:
     if O[4]>=1:
       child = [O[0], O[1]+1, 0, O[3], O[4]-1]
       if Check(child):
         res.append(child)
-
-    
   # 5. 1 người 1 quỷ qua sông
   if O[2] == 0:
     if O[0]>=1 and O[1]>=1:
@@ -70,7 +63,6 @@ def Children(O):
       child = [O[0]+1, O[1]+1, 0, O[3]-1, O[4]-1]
       if Check(child):
         res.append(child)
-
   return res
 
 
@@ -81,7 +73,7 @@ Goal = [0,0,1,3,3]
 OK = False
 
 # 1.Cho đỉnh xuất phát vào open. 
-Open = [Start]
+Open = [(Start,None)]
 Closed = []
 # 2. Nếu open rỗng thì tìm kiếm thất bại, kết thúc việc tìm kiếm.
 # 6. Trở lại bước 2.
@@ -97,7 +89,7 @@ while len(Open) > 0:
   # 5. Tìm tất cả các đỉnh con của ʘ không thuộc open và closed cho vào cuối của open
   for child in Children(O):
     if child not in Open and child not in Closed:
-      Open.append(child, O_TT)
+      Open.append((child,O_TT))
 
 
 print(OK)
