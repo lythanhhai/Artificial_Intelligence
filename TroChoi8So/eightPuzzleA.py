@@ -16,7 +16,7 @@ def move(S,o):
   L = [list(x) for x in S]
   i,j = ToadoZero(S)
   if o == 0:
-    if i<3:
+    if i<2:
       L[i][j] = L[i+1][j]
       L[i+1][j] = 0
       return tuple([tuple(x) for x in L])
@@ -26,7 +26,7 @@ def move(S,o):
       L[i-1][j] = 0
       return tuple([tuple(x) for x in L])
   elif o == 2:
-    if j<3:
+    if j<2:
       L[i][j] = L[i][j+1]
       L[i][j+1] = 0
       return tuple([tuple(x) for x in L])
@@ -38,9 +38,9 @@ def move(S,o):
   return None
 
 
-Goal = ((1,2,3,4),(5,6,7,8),(9,10,11,12),(13,14,15,0))
+Goal = ((1,2,3),(4,5,6),(7,8,0))
 Start = Goal
-for _ in range(20):
+for _ in range(500):
   O = move(Start,random.randint(0,3))
   if O!=None:
     Start = O
