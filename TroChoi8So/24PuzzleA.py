@@ -48,12 +48,23 @@ def distance(S,G):
         ans +=1
   return ans
 
+def distance2(S,G):
+  ans = 0
+  n = len(S)
+  for i in range(n):
+    for j in range(n):
+      if S[i][j] != 0:
+        ii = (S[i][j] - 1)/n
+        jj = (S[i][j] - 1)%n
+        ans += abs(i - ii) + abs(j - jj)
+  return ans
+
 #Goal = ((1,2,3),(4,5,6),(7,8,0))
 #Goal = ((1,2,3,4),(5,6,7,8),(9,10,11,12),(13,14,15,0))
 Goal = tuple([tuple([(i*5 + j+1)%25 for j in range(5)]) for i in range(5)])
 print(Goal)
 Start = Goal
-for _ in range(50000):
+for _ in range(500):
   O = move(Start,random.randint(0,3))
   if O!=None:
     Start = O
@@ -84,7 +95,7 @@ while not Open.empty():
       g = O_TT[0][1] + 1
       h = distance(child,Goal)
       f = g + h
-      Open.put(((h,g),child,i,O_TT))
+      Open.put(((f,g),child,i,O_TT))
       Closed.add(child)
 
 
